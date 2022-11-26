@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Skill;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\File;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Skill>
@@ -17,15 +17,12 @@ class SkillFactory extends Factory
      */
     public function definition()
     {
+        $color = $this->faker->randomElement(Skill::getAvaliableBackgroundColors());
         return [
-            //
+            'name' => $this->faker->unique()->word(),
+            'color' => $color
         ];
     }
 
-    public function getAvaliableBackgroundColors()
-    {
-        $element = json_decode(
-            File::get(resource_path('json/costumization.json'))
-        );
-    }
+
 }
